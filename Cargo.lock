@@ -3,13 +3,6 @@
 version = 3
 
 [[package]]
-name = "core"
-version = "0.1.0"
-dependencies = [
- "serde",
-]
-
-[[package]]
 name = "proc-macro2"
 version = "1.0.56"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -25,6 +18,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4424af4bf778aae2051a77b60283332f386554255d722233d09fbfc7e30da2fc"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "rust-ecs"
+version = "0.1.0"
+dependencies = [
+ "serde",
 ]
 
 [[package]]
