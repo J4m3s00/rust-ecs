@@ -56,7 +56,7 @@ impl EntityComponentManager {
             .remove(&(entity, std::any::type_name::<T>().to_string()));
     }
 
-    pub fn queury_component<T: 'static>(&self) -> Vec<(Entity, &T)> {
+    pub fn queue_component<T: 'static>(&self) -> Vec<(Entity, &T)> {
         self.component_store
             .iter()
             .filter(|(_, component)| component.is::<T>())
