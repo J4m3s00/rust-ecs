@@ -1,6 +1,6 @@
 use std::{any::Any, collections::HashMap};
 
-use crate::{entity::Entity, entity_tree::EntityTree, error::EcsError};
+use crate::{entity::Entity, entity_tree::EntityTree};
 
 type ComponentStore = HashMap<(Entity, String), Box<dyn Any>>;
 
