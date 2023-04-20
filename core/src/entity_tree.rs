@@ -23,9 +23,17 @@ impl Default for EntityTree {
 }
 
 impl EntityTree {
-    pub fn set_root(&mut self, entity: Entity) -> &Self {
+    pub fn new(root_entity: Entity) -> Self {
+        let mut tree = Self::default();
+        if root_entity.is_some() {
+            tree.insert_node(root_entity);
+            tree.set_root(root_entity);
+        }
+        tree
+    }
+
+    pub fn set_root(&mut self, entity: Entity) {
         self.root = Some(entity);
-        self
     }
 
     pub fn add_child(&mut self, parent: Entity, child: Entity) -> Result<(), EcsError> {
@@ -35,8 +43,6 @@ impl EntityTree {
 
         if let Some(p) = self.children.get_mut(&parent) {
             p.push(child);
-            let res = format!("Adding child: {:?} to parent: {:?}", child, parent);
-            dbg!(res);
         } else if self.root.is_some() {
             if parent == self.root.unwrap() {
                 return Err(EcsError::EntityNotFound(

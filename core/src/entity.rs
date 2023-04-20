@@ -23,4 +23,8 @@ impl Entity {
     pub fn is_none(&self) -> bool {
         self.0 == Self::none().0
     }
+
+    pub fn is_some(&self) -> bool {
+        !self.is_none()
+    }
 }
