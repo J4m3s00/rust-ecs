@@ -1,6 +1,6 @@
 use std::{any::Any, collections::HashMap};
 
-use crate::{entity::Entity, entity_tree::EntityTree};
+use crate::{entity::Entity, entity_tree::EntityTree, error::EcsError};
 
 type ComponentStore = HashMap<(Entity, String), Box<dyn Any>>;
 
@@ -54,6 +54,14 @@ impl EntityComponentManager {
     pub fn remove_component<T: 'static>(&mut self, entity: Entity) {
         self.component_store
             .remove(&(entity, std::any::type_name::<T>().to_string()));
+    }
+
+    pub fn queury_component<T: 'static>(&self) -> Vec<(Entity, &T)> {
+        self.component_store
+            .iter()
+            .filter(|(_, component)| component.is::<T>())
+            .map(|((entity, _), component)| (*entity, component.downcast_ref::<T>().unwrap()))
+            .collect()
     }
 }
 
